@@ -87,9 +87,13 @@ class Car {
     this.tank += gallons;
   }
   drive(distance){
-    this.odometer += distance;
-    this.tank -=  Math.floor(distance / this.milesPerGallon)
-    if(this.tank === 0){
+    const drivableDistance = this.tank * this.milesPerGallon;
+    if(distance <= drivableDistance){
+      this.odometer += distance;
+      this.tank -= distance / this.milesPerGallon;
+    } else{
+      this.odometer += drivableDistance;
+      this.tank = 0
       return `I ran out of fuel at ${this.odometer} miles!`
     }
   }
@@ -190,7 +194,7 @@ const lisa = new Student({
   favSubjects: ['CSS', 'JavaScript', 'React']
 })
 
-console.log(lisa.sprintChallenge('Javascript Application'));
+// console.log(lisa.sprintChallenge('Javascript Application'));
 
 
 /*
